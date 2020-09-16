@@ -1,18 +1,16 @@
 package com.vlopatka.service.spaceRocketCenter
 
 import com.vlopatka.domain.Rocket
-import com.vlopatka.service.notifier.ConsoleNotifier
+import com.vlopatka.reflection.ObjectFactory
 import com.vlopatka.service.notifier.Notifier
-import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
 import kotlin.random.Random
 
-
 class SpaceRocketCenter {
-    private val notifier: Notifier = ConsoleNotifier()
-    private val securityService: SecurityService = OutdoorSecurityService()
+    private val notifier: Notifier = ObjectFactory.createObject(Notifier::class.java)
+    private val securityService: SecurityService = ObjectFactory.createObject(SecurityService::class.java)
 
-    fun manageLaunch(rocket: Rocket): Unit {
+    fun manageLaunch(rocket: Rocket) {
         notifier.notify("Attention, we are performing a launch.")
         securityService.safetyCheck()
 
@@ -24,7 +22,12 @@ class SpaceRocketCenter {
 
     private fun launch(rocket: Rocket): Boolean {
         println("Land off!")
-        return Random.nextInt(0, 100) > 50
+        val launchSuccessfulness = Random.nextInt(0, 100)
+        return isSuccessFul(launchSuccessfulness)
+    }
+
+    private fun isSuccessFul(launchSuccessfulness: Int): Boolean {
+        return launchSuccessfulness > 50
     }
 }
 
