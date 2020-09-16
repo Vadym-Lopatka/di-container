@@ -11,11 +11,11 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    testImplementation(kotlin("test-junit5"))
+    implementation("org.reflections:reflections:0.9.12")
 }
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 application {
-    mainClassName = "MainKt"
+    mainClassName = "com.vlopatka.AppKt"
 }
