@@ -1,11 +1,13 @@
 package com.vlopatka.reflection
 
-import com.vlopatka.reflection.config.Config
 import com.vlopatka.reflection.config.YmlConfig
+import com.vlopatka.service.security.OutdoorSecurityService
+import com.vlopatka.service.security.SecurityService
 
 object ObjectFactory {
 
-    private val config: Config = YmlConfig("com.vlopatka")
+    private val config =
+        YmlConfig("com.vlopatka", mapOf(SecurityService::class.java to OutdoorSecurityService::class.java))
 
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
