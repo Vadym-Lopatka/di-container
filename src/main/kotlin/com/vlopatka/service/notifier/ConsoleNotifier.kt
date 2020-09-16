@@ -5,10 +5,10 @@ class ConsoleNotifier : Notifier {
         println(msg)
     }
 
-    override fun periodicNotifier(msg: String, counter: Int, pending: Long) {
+    override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
         for (i in counter downTo 1) {
             println("$msg $i")
-            Thread.sleep(pending)
+            Thread.sleep(pendingInMs)
         }
     }
 }
