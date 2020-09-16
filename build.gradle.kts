@@ -17,5 +17,5 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 application {
-    mainClassName = "MainKt"
+    mainClassName = "com.vlopatka.AppKt"
 }
