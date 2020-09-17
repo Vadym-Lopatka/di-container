@@ -2,7 +2,7 @@ package com.vlopatka.reflection.config
 
 import org.reflections.Reflections
 
-class YmlConfig(packageToScan: String, interfaceToImplementationMap: Map<Class<*>, Class<*>>) : Config {
+class KotlinConfig(packageToScan: String, interfaceToImplementationMap: Map<Class<*>, Class<*>>) : Config {
     private val scanner: Reflections = Reflections(packageToScan)
     private val interfaceToImplementationMap = interfaceToImplementationMap
 
