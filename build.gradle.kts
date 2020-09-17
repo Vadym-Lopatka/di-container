@@ -11,6 +11,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
+    implementation ("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
     implementation("org.reflections:reflections:0.9.12")
 }
 tasks.withType<KotlinCompile>() {
