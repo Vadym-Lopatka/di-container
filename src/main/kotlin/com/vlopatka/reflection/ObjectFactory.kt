@@ -4,13 +4,11 @@ import com.vlopatka.annotation.InjectFromConfig
 import com.vlopatka.reflection.config.KotlinConfig
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
-import kotlin.reflect.KClass
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KProperty1
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
-import kotlin.reflect.jvm.javaField
 
 object ObjectFactory {
 
@@ -35,23 +33,30 @@ object ObjectFactory {
         }
     }
 
-    private fun <T> buildObject(implClass: Class<T>): Any {
-        var t = implClass.declaredConstructors.first().newInstance()
+    private fun <T> buildObject(implClass: Class<T>): T {
+        val thObject = implClass.declaredConstructors.first().newInstance()
+        val configData = getMapFrom("application.properties")
 
-        for(member in t::class.declaredMemberProperties) {
-            if(member.hasAnnotation<InjectFromConfig>()) {
-                val table = member.annotations.find { it is InjectFromConfig } as? InjectFromConfig
-                val configurationPropertyName = table?.value?.takeIf { it.isNotEmpty() } ?: member.name
+        for (field in thObject::class.memberProperties) {
+            if (field.hasAnnotation<InjectFromConfig>()) {
+                val theAnnotation = field.annotations.find { it is InjectFromConfig } as? InjectFromConfig
+                val fieldName = theAnnotation?.value?.takeIf { it.isNotEmpty() } ?: field.name
 
-                val propertiesMap = getMapFrom("application.properties")
-
-                // todo set property from config to the field
-                println(propertiesMap)
+                setValueToField(thObject,field, configData[fieldName])
             }
         }
 
-        return t
+        return thObject as T
     }
+
+    private fun setValueToField(thObject: Any, field: KProperty1<out Any, *>, value: String?) {
+        val property = thObject::class.memberProperties.find { it.name == field.name }
+        if (property is KMutableProperty<*>) {
+            property.isAccessible = true
+            property.setter.call(thObject, value)
+        }
+    }
+
 
     private fun getMapFrom(s: String): Map<String,String> {
         return ClassLoader.getSystemClassLoader().getResource("application.properties")
