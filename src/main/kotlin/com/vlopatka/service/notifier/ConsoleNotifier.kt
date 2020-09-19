@@ -9,7 +9,6 @@ class ConsoleNotifier : Notifier {
 
     override fun notify(msg: String) {
         println("$greeting $msg")
-//        println("$msg")
     }
 
     override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
