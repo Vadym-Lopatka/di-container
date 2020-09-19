@@ -1,10 +1,10 @@
 package com.vlopatka.service.notifier
 
-import com.vlopatka.annotation.InjectFromConfig
+import com.vlopatka.annotation.InjectProperty
 
 class ConsoleNotifier : Notifier {
 
-    @InjectFromConfig
+    @InjectProperty
     private lateinit var greeting: String
 
     override fun notify(msg: String) {

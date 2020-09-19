@@ -1,6 +1,6 @@
 package com.vlopatka.reflection
 
-import com.vlopatka.annotation.InjectFromConfig
+import com.vlopatka.annotation.InjectProperty
 import com.vlopatka.reflection.config.KotlinConfig
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
@@ -27,26 +27,26 @@ object ObjectFactory {
 
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
-            buildObject(config.getImplClass(type)) as T
+            buildObject(config.getImplClass(type))
         } else {
-            buildObject(type) as T
+            buildObject(type)
         }
     }
 
     private fun <T> buildObject(implClass: Class<T>): T {
-        val thObject = implClass.declaredConstructors.first().newInstance()
-        val configData = getMapFrom("application.properties")
+        val createdObject = implClass.declaredConstructors.first().newInstance()
+        val dataFromConfig = getMapFromFile("application.properties")
 
-        for (field in thObject::class.memberProperties) {
-            if (field.hasAnnotation<InjectFromConfig>()) {
-                val theAnnotation = field.annotations.find { it is InjectFromConfig } as? InjectFromConfig
-                val fieldName = theAnnotation?.value?.takeIf { it.isNotEmpty() } ?: field.name
+        for (field in createdObject::class.memberProperties) {
+            if (field.hasAnnotation<InjectProperty>()) {
+                val theAnnotation = field.annotations.find { it is InjectProperty } as InjectProperty
+                val valueForInjection = theAnnotation.value.takeIf { it.isNotEmpty() } ?: dataFromConfig[field.name]
 
-                setValueToField(thObject,field, configData[fieldName])
+                setValueToField(createdObject, field, valueForInjection)
             }
         }
 
-        return thObject as T
+        return createdObject as T
     }
 
     private fun setValueToField(thObject: Any, field: KProperty1<out Any, *>, value: String?) {
@@ -57,12 +57,11 @@ object ObjectFactory {
         }
     }
 
-
-    private fun getMapFrom(s: String): Map<String,String> {
-        return ClassLoader.getSystemClassLoader().getResource("application.properties")
+    private fun getMapFromFile(filename: String): Map<String, String> {
+        return ClassLoader.getSystemClassLoader().getResource(filename)
             .readText()
             .lines()
             .map { it.split("=") }
-            .associateBy({it[0]}, {it[1]})
+            .associateBy({ it[0] }, { it[1] })
     }
 }
