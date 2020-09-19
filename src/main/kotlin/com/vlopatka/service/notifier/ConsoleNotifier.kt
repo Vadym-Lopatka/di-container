@@ -1,8 +1,14 @@
 package com.vlopatka.service.notifier
 
+import com.vlopatka.annotation.InjectProperty
+
 class ConsoleNotifier : Notifier {
+
+    @InjectProperty
+    private lateinit var greeting: String
+
     override fun notify(msg: String) {
-        println(msg)
+        println("$greeting $msg")
     }
 
     override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
