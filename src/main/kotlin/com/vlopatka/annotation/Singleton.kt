@@ -8,4 +8,4 @@ package com.vlopatka.annotation
     AnnotationTarget.CLASS
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Component
+annotation class Singleton

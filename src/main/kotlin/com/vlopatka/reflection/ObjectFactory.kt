@@ -29,9 +29,10 @@ object ObjectFactory {
         /**
          * Here I used a chain of responsibility pattern.
          *
-         * Every DI component that would be created through @InjectComponent
+         * Every DI component that would be created through @Singleton
          * will be processed once(on startup) by each implementation of the ObjectConfigurator.
          *
+         * @see com.vlopatka.annotation.Singleton
          * @see com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
          */
         configurators.forEach { it.configure(createdObject) }
