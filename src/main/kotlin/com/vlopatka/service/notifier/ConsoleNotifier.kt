@@ -1,7 +1,9 @@
 package com.vlopatka.service.notifier
 
+import com.vlopatka.annotation.Component
 import com.vlopatka.annotation.InjectProperty
 
+@Component
 class ConsoleNotifier : Notifier {
 
     @InjectProperty
