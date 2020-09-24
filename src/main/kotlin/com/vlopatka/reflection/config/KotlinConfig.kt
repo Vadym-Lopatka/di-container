@@ -15,4 +15,6 @@ class KotlinConfig(packageToScan: String, interfaceToImplementationMap: Map<Clas
 
         }) as Class<T>
     }
+
+    override fun getScanner() = scanner
 }

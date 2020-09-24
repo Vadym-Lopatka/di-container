@@ -1,16 +1,9 @@
 package com.vlopatka.reflection
 
-import com.vlopatka.annotation.InjectProperty
 import com.vlopatka.reflection.config.KotlinConfig
-import com.vlopatka.reflection.objectConfigurator.InjectPropertyAnnotationObjectConfigurator
-import com.vlopatka.service.notifier.Notifier
+import com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.hasAnnotation
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 object ObjectFactory {
 
@@ -27,7 +20,7 @@ object ObjectFactory {
         )
     )
 
-    private val configurator =  InjectPropertyAnnotationObjectConfigurator()
+    private val configurators: List<ObjectConfigurator> = initConfigurators()
 
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
@@ -39,9 +32,16 @@ object ObjectFactory {
 
     private fun <T> buildObject(implClass: Class<T>): T {
         val createdObject = implClass.declaredConstructors.first().newInstance()
-        configurator.configure(createdObject)
+        configurators.forEach { it.configure(createdObject) }
 
         return createdObject as T
     }
 
+    private fun initConfigurators(): List<ObjectConfigurator> {
+        val objConfiguratorImplementations = config.getScanner().getSubTypesOf(ObjectConfigurator::class.java)
+
+        return objConfiguratorImplementations
+            .map { it.declaredConstructors.first().newInstance() as ObjectConfigurator }
+            .toList()
+    }
 }
