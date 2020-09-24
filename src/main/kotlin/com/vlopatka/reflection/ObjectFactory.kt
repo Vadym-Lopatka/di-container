@@ -1,29 +1,19 @@
 package com.vlopatka.reflection
 
-import com.vlopatka.annotation.InjectProperty
 import com.vlopatka.reflection.config.KotlinConfig
+import com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.hasAnnotation
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 object ObjectFactory {
 
     private val config = KotlinConfig(
         packageToScan = "com.vlopatka",
-        /**
-         * I have several implementations of SecurityService
-         * and here I am configuring which particular
-         * implementation I want my DI container to inject under SecurityService interface
-         * @see com.vlopatka.service.security.SecurityService
-         */
-        interfaceToImplementationMap = mapOf(
-            SecurityService::class.java to OutdoorSecurityService::class.java
-        )
+        interfaceToImplementationMap = defineImplementations()
     )
+
+    private val configurators: List<ObjectConfigurator> = initConfigurators()
+
 
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
@@ -35,33 +25,36 @@ object ObjectFactory {
 
     private fun <T> buildObject(implClass: Class<T>): T {
         val createdObject = implClass.declaredConstructors.first().newInstance()
-        val dataFromConfig = getMapFromFile("application.properties")
 
-        for (field in createdObject::class.memberProperties) {
-            if (field.hasAnnotation<InjectProperty>()) {
-                val theAnnotation = field.annotations.find { it is InjectProperty } as InjectProperty
-                val valueForInjection = theAnnotation.value.takeIf { it.isNotEmpty() } ?: dataFromConfig[field.name]
-
-                setValueToField(createdObject, field, valueForInjection)
-            }
-        }
+        /**
+         * Here I used a chain of responsibility pattern.
+         *
+         * Every DI component that would be created through @InjectComponent
+         * will be processed once(on startup) by each implementation of the ObjectConfigurator.
+         *
+         * @see com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+         */
+        configurators.forEach { it.configure(createdObject) }
 
         return createdObject as T
     }
 
-    private fun setValueToField(thObject: Any, field: KProperty1<out Any, *>, value: String?) {
-        val property = thObject::class.memberProperties.find { it.name == field.name }
-        if (property is KMutableProperty<*>) {
-            property.isAccessible = true
-            property.setter.call(thObject, value)
-        }
-    }
+    /**
+     * Define here which particular implementation to use when your interface has multiple implementations
+     * @see com.vlopatka.service.security.SecurityService
+     *
+     * p.s. In prod-like products, it would be more convenient to read this map from an outer source.
+     * For example,  a config file.
+     */
+    private fun defineImplementations(): Map<Class<*>, Class<*>> = mapOf(
+        SecurityService::class.java to OutdoorSecurityService::class.java
+    )
 
-    private fun getMapFromFile(filename: String): Map<String, String> {
-        return ClassLoader.getSystemClassLoader().getResource(filename)
-            .readText()
-            .lines()
-            .map { it.split("=") }
-            .associateBy({ it[0] }, { it[1] })
+    private fun initConfigurators(): List<ObjectConfigurator> {
+        val objConfiguratorImplementations = config.getScanner().getSubTypesOf(ObjectConfigurator::class.java)
+
+        return objConfiguratorImplementations
+            .map { it.declaredConstructors.first().newInstance() as ObjectConfigurator }
+            .toList()
     }
 }
