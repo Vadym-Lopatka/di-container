@@ -4,8 +4,9 @@ import com.vlopatka.engine.config.KotlinConfig
 import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
+import java.lang.reflect.Type
 
-class ObjectFactory {
+object ObjectFactory {
 
     private val config = KotlinConfig(
         packageToScan = "com.vlopatka",
@@ -21,6 +22,11 @@ class ObjectFactory {
         } else {
             buildObject(type)
         }
+    }
+
+    fun createObject(type: Type): Any? {
+        println(type::class.java)
+        return type
     }
 
     private fun <T> buildObject(implClass: Class<T>): T {

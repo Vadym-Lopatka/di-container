@@ -1,11 +1,9 @@
 package com.vlopatka.engine.objectConfigurator
 
 import com.vlopatka.annotation.InjectProperty
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty1
+import com.vlopatka.engine.helper.FieldHelper.setValue
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 class InjectPropertyAnnotationObjectConfigurator : ObjectConfigurator {
 
@@ -15,18 +13,10 @@ class InjectPropertyAnnotationObjectConfigurator : ObjectConfigurator {
         for (field in obj::class.memberProperties) {
             if (field.hasAnnotation<InjectProperty>()) {
                 val theAnnotation = field.annotations.find { it is InjectProperty } as InjectProperty
-                val valueForInjection = theAnnotation.value.takeIf { it.isNotEmpty() } ?: propertiesMap[field.name]
+                val value = theAnnotation.value.takeIf { it.isNotEmpty() } ?: propertiesMap[field.name]
 
-                setValueToField(obj, field, valueForInjection)
+                setValue(obj, field, value)
             }
-        }
-    }
-
-    private fun setValueToField(thObject: Any, field: KProperty1<out Any, *>, value: String?) {
-        val property = thObject::class.memberProperties.find { it.name == field.name }
-        if (property is KMutableProperty<*>) {
-            property.isAccessible = true
-            property.setter.call(thObject, value)
         }
     }
 
