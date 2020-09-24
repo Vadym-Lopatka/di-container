@@ -2,6 +2,8 @@ package com.vlopatka.reflection
 
 import com.vlopatka.annotation.InjectProperty
 import com.vlopatka.reflection.config.KotlinConfig
+import com.vlopatka.reflection.objectConfigurator.InjectPropertyAnnotationObjectConfigurator
+import com.vlopatka.service.notifier.Notifier
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
 import kotlin.reflect.KMutableProperty
@@ -25,6 +27,8 @@ object ObjectFactory {
         )
     )
 
+    private val configurator =  InjectPropertyAnnotationObjectConfigurator()
+
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
             buildObject(config.getImplClass(type))
@@ -35,33 +39,9 @@ object ObjectFactory {
 
     private fun <T> buildObject(implClass: Class<T>): T {
         val createdObject = implClass.declaredConstructors.first().newInstance()
-        val dataFromConfig = getMapFromFile("application.properties")
-
-        for (field in createdObject::class.memberProperties) {
-            if (field.hasAnnotation<InjectProperty>()) {
-                val theAnnotation = field.annotations.find { it is InjectProperty } as InjectProperty
-                val valueForInjection = theAnnotation.value.takeIf { it.isNotEmpty() } ?: dataFromConfig[field.name]
-
-                setValueToField(createdObject, field, valueForInjection)
-            }
-        }
+        configurator.configure(createdObject)
 
         return createdObject as T
     }
 
-    private fun setValueToField(thObject: Any, field: KProperty1<out Any, *>, value: String?) {
-        val property = thObject::class.memberProperties.find { it.name == field.name }
-        if (property is KMutableProperty<*>) {
-            property.isAccessible = true
-            property.setter.call(thObject, value)
-        }
-    }
-
-    private fun getMapFromFile(filename: String): Map<String, String> {
-        return ClassLoader.getSystemClassLoader().getResource(filename)
-            .readText()
-            .lines()
-            .map { it.split("=") }
-            .associateBy({ it[0] }, { it[1] })
-    }
 }
