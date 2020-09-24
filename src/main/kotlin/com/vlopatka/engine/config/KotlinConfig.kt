@@ -1,4 +1,4 @@
-package com.vlopatka.reflection.config
+package com.vlopatka.engine.config
 
 import org.reflections.Reflections
 

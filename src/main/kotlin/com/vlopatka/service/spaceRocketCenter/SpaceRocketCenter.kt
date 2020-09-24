@@ -1,14 +1,18 @@
 package com.vlopatka.service.spaceRocketCenter
 
+import com.vlopatka.annotation.Injection
 import com.vlopatka.domain.Rocket
-import com.vlopatka.reflection.ObjectFactory
+import com.vlopatka.engine.ObjectFactory
 import com.vlopatka.service.notifier.Notifier
 import com.vlopatka.service.security.SecurityService
 import kotlin.random.Random
 
 class SpaceRocketCenter {
-    private val notifier: Notifier = ObjectFactory.createObject(Notifier::class.java)
-    private val securityService: SecurityService = ObjectFactory.createObject(SecurityService::class.java)
+    @Injection
+    private lateinit var notifier: Notifier
+
+    @Injection
+    private lateinit var securityService: SecurityService
 
     fun manageLaunch(rocket: Rocket) {
         notifier.notify("Attention, we are performing a launch.")

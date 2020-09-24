@@ -1,4 +1,4 @@
-package com.vlopatka.reflection.objectConfigurator
+package com.vlopatka.engine.objectConfigurator
 
 import com.vlopatka.annotation.InjectProperty
 import kotlin.reflect.KMutableProperty

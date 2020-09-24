@@ -1,11 +1,11 @@
-package com.vlopatka.reflection
+package com.vlopatka.engine
 
-import com.vlopatka.reflection.config.KotlinConfig
-import com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+import com.vlopatka.engine.config.KotlinConfig
+import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
 
-object ObjectFactory {
+class ObjectFactory {
 
     private val config = KotlinConfig(
         packageToScan = "com.vlopatka",
@@ -33,7 +33,7 @@ object ObjectFactory {
          * will be processed once(on startup) by each implementation of the ObjectConfigurator.
          *
          * @see com.vlopatka.annotation.Singleton
-         * @see com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+         * @see com.vlopatka.engine.objectConfigurator.ObjectConfigurator
          */
         configurators.forEach { it.configure(createdObject) }
 
