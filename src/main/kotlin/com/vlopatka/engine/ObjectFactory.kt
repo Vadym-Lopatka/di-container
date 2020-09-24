@@ -1,9 +1,10 @@
-package com.vlopatka.reflection
+package com.vlopatka.engine
 
-import com.vlopatka.reflection.config.KotlinConfig
-import com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+import com.vlopatka.engine.config.KotlinConfig
+import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
+import java.lang.reflect.Type
 
 object ObjectFactory {
 
@@ -23,16 +24,22 @@ object ObjectFactory {
         }
     }
 
+    fun createObject(type: Type): Any? {
+        println(type::class.java)
+        return type
+    }
+
     private fun <T> buildObject(implClass: Class<T>): T {
         val createdObject = implClass.declaredConstructors.first().newInstance()
 
         /**
          * Here I used a chain of responsibility pattern.
          *
-         * Every DI component that would be created through @InjectComponent
+         * Every DI component that would be created through @Singleton
          * will be processed once(on startup) by each implementation of the ObjectConfigurator.
          *
-         * @see com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+         * @see com.vlopatka.annotation.Singleton
+         * @see com.vlopatka.engine.objectConfigurator.ObjectConfigurator
          */
         configurators.forEach { it.configure(createdObject) }
 
