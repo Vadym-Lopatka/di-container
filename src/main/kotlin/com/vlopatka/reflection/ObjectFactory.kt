@@ -25,6 +25,15 @@ object ObjectFactory {
 
     private fun <T> buildObject(implClass: Class<T>): T {
         val createdObject = implClass.declaredConstructors.first().newInstance()
+
+        /**
+         * Here I used a chain of responsibility pattern.
+         *
+         * Every DI component that would be created through @InjectComponent
+         * will be processed once(on startup) by each implementation of the ObjectConfigurator.
+         *
+         * @see com.vlopatka.reflection.objectConfigurator.ObjectConfigurator
+         */
         configurators.forEach { it.configure(createdObject) }
 
         return createdObject as T
