@@ -9,18 +9,11 @@ object ObjectFactory {
 
     private val config = KotlinConfig(
         packageToScan = "com.vlopatka",
-        /**
-         * I have several implementations of SecurityService
-         * and here I am configuring which particular
-         * implementation I want my DI container to inject under SecurityService interface
-         * @see com.vlopatka.service.security.SecurityService
-         */
-        interfaceToImplementationMap = mapOf(
-            SecurityService::class.java to OutdoorSecurityService::class.java
-        )
+        interfaceToImplementationMap = defineImplementations()
     )
 
     private val configurators: List<ObjectConfigurator> = initConfigurators()
+
 
     fun <T> createObject(type: Class<T>): T {
         return if (type.isInterface) {
@@ -36,6 +29,17 @@ object ObjectFactory {
 
         return createdObject as T
     }
+
+    /**
+     * Define here which particular implementation to use when your interface has multiple implementations
+     * @see com.vlopatka.service.security.SecurityService
+     *
+     * p.s. In prod-like products, it would be more convenient to read this map from an outer source.
+     * For example,  a config file.
+     */
+    private fun defineImplementations(): Map<Class<*>, Class<*>> = mapOf(
+        SecurityService::class.java to OutdoorSecurityService::class.java
+    )
 
     private fun initConfigurators(): List<ObjectConfigurator> {
         val objConfiguratorImplementations = config.getScanner().getSubTypesOf(ObjectConfigurator::class.java)
