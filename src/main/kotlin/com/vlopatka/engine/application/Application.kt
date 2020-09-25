@@ -5,10 +5,10 @@ import com.vlopatka.engine.config.KotlinConfig
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
 
-class Application {
+object Application {
     fun run(packageToScan: String, interfaceToImplementationMap: Map<Class<*>, Class<*>>): ApplicationContext {
         val config = KotlinConfig(
-            packageToScan = "com.vlopatka",
+            packageToScan = packageToScan,
             interfaceToImplementationMap = defineImplementations()
         )
 

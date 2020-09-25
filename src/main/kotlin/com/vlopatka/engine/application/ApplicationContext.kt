@@ -16,7 +16,7 @@ class ApplicationContext(val config: KotlinConfig) {
         }
 
         val implClass = type.takeIf { it.isInterface }?.let { config.getImplClass(type) } ?: type
-        val obj = factory?.createObject(type) ?: throw IllegalStateException("factory is not initialized")
+        val obj = factory?.createObject(implClass) ?: throw IllegalStateException("factory is not initialized")
 
         if (implClass.isAnnotationPresent(Singleton::class.java)) {
             cache[type] = obj!!
