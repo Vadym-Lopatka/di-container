@@ -11,7 +11,7 @@ class ApplicationContext(val config: KotlinConfig) {
 
     fun <T> getObject(type: Class<T>): T {
 
-        if (cache.contains(type)) {
+        if (cache.containsKey(type)) {
             return cache[type] as T
         }
 
@@ -19,7 +19,7 @@ class ApplicationContext(val config: KotlinConfig) {
         val obj = factory?.createObject(implClass) ?: throw IllegalStateException("factory is not initialized")
 
         if (implClass.isAnnotationPresent(Singleton::class.java)) {
-            cache[type] = obj!!
+            cache[type] = obj
         }
 
         return obj
