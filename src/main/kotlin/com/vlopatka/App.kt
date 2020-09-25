@@ -4,7 +4,7 @@ import com.vlopatka.domain.Rocket
 import com.vlopatka.engine.application.Application
 import com.vlopatka.service.security.OutdoorSecurityService
 import com.vlopatka.service.security.SecurityService
-import com.vlopatka.service.spaceRocketCenter.SpaceRocketCenter
+import com.vlopatka.service.center.NationalSpaceCenter
 
 fun main(args: Array<String>) {
     val context = Application.run(
@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
         interfaceToImplementationMap = defineImplementations()
     )
 
-    val spaceRocketCenter = context.getObject(SpaceRocketCenter::class.java)
+    val spaceRocketCenter = context.getObject(NationalSpaceCenter::class.java)
     spaceRocketCenter.manageLaunch(Rocket())
 }
 
