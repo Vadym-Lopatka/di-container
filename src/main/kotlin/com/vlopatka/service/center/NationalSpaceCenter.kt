@@ -1,6 +1,6 @@
 package com.vlopatka.service.center
 
-import com.vlopatka.annotation.Injection
+import com.vlopatka.engine.annotation.Injection
 import com.vlopatka.domain.Rocket
 import com.vlopatka.service.launcher.RocketLauncher
 import com.vlopatka.service.notifier.Notifier

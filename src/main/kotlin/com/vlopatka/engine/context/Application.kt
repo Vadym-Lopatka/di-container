@@ -1,4 +1,4 @@
-package com.vlopatka.engine.application
+package com.vlopatka.engine.context
 
 import com.vlopatka.engine.ObjectFactory
 import com.vlopatka.engine.config.KotlinConfig

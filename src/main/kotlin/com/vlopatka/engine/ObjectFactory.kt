@@ -1,6 +1,6 @@
 package com.vlopatka.engine
 
-import com.vlopatka.engine.application.ApplicationContext
+import com.vlopatka.engine.context.ApplicationContext
 import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 
 class ObjectFactory(

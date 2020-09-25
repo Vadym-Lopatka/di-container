@@ -1,6 +1,6 @@
 package com.vlopatka.service.security
 
-import com.vlopatka.annotation.Injection
+import com.vlopatka.engine.annotation.Injection
 import com.vlopatka.service.notifier.Notifier
 
 class OutdoorSecurityService : SecurityService {

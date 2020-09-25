@@ -1,7 +1,7 @@
 package com.vlopatka.engine.objectConfigurator
 
-import com.vlopatka.annotation.InjectProperty
-import com.vlopatka.engine.application.ApplicationContext
+import com.vlopatka.engine.annotation.InjectProperty
+import com.vlopatka.engine.context.ApplicationContext
 import com.vlopatka.engine.helper.FieldHelper.setValue
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties

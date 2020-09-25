@@ -1,7 +1,7 @@
 package com.vlopatka.service.notifier
 
-import com.vlopatka.annotation.Singleton
-import com.vlopatka.annotation.InjectProperty
+import com.vlopatka.engine.annotation.Singleton
+import com.vlopatka.engine.annotation.InjectProperty
 
 @Singleton
 class ConsoleNotifier : Notifier {
