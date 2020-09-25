@@ -1,8 +1,8 @@
 package com.vlopatka.domain.service.center
 
-import com.vlopatka.domain.service.rocket.Rocket
 import com.vlopatka.domain.service.launcher.RocketLauncher
 import com.vlopatka.domain.service.notifier.Notifier
+import com.vlopatka.domain.service.rocket.Rocket
 import com.vlopatka.domain.service.security.SecurityService
 import com.vlopatka.engine.annotation.Injection
 
@@ -18,13 +18,13 @@ class NationalSpaceCenter {
     private lateinit var launcher: RocketLauncher
 
     fun manageLaunch(rocket: Rocket) {
-        notifier.notify("Attention, we are performing a launch.")
+        notifier.notify("Attention, we are performing a launch of: $rocket")
         securityService.safetyCheck()
 
         notifier.periodicNotifier(msg = "Start in:", pendingInMs = 200)
 
         val launchResult = launcher.launch(rocket)
-        notifier.notify("The launch result is: $launchResult - ${launchResult.toReadableMessage()}")
+        notifier.notify("The launch result of $rocket is: $launchResult - ${launchResult.toReadableMessage()}")
     }
 }
 
