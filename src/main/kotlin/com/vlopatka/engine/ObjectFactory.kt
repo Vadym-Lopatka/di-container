@@ -8,17 +8,7 @@ class ObjectFactory(
 ) {
     private val configurators: List<ObjectConfigurator> = initConfigurators()
 
-    fun <T> createObject(type: Class<T>): T {
-        /*return if (type.isInterface) {
-            buildObject(config.getImplClass(type))
-        } else {
-            buildObject(type)
-        }*/
-
-        return buildObject(type)
-    }
-
-    private fun <T> buildObject(implClass: Class<T>): T {
+    fun <T> createObject(implClass: Class<T>): T {
         val obj = implClass.declaredConstructors.first().newInstance()
 
         /**
