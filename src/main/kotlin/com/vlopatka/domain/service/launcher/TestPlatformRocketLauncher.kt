@@ -1,9 +1,9 @@
-package com.vlopatka.service.launcher
+package com.vlopatka.domain.service.launcher
 
+import com.vlopatka.domain.service.rocket.Rocket
+import com.vlopatka.domain.service.notifier.Notifier
 import com.vlopatka.engine.annotation.Injection
 import com.vlopatka.engine.annotation.Singleton
-import com.vlopatka.domain.Rocket
-import com.vlopatka.service.notifier.Notifier
 import kotlin.random.Random
 
 @Singleton

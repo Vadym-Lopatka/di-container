@@ -1,10 +1,10 @@
 package com.vlopatka
 
-import com.vlopatka.domain.Rocket
+import com.vlopatka.domain.service.rocket.Rocket
+import com.vlopatka.domain.service.center.NationalSpaceCenter
+import com.vlopatka.domain.service.security.OutdoorSecurityService
+import com.vlopatka.domain.service.security.SecurityService
 import com.vlopatka.engine.context.Application
-import com.vlopatka.service.security.OutdoorSecurityService
-import com.vlopatka.service.security.SecurityService
-import com.vlopatka.service.center.NationalSpaceCenter
 
 fun main(args: Array<String>) {
     val context = Application.run(

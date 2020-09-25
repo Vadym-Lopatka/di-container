@@ -1,10 +1,10 @@
-package com.vlopatka.service.center
+package com.vlopatka.domain.service.center
 
+import com.vlopatka.domain.service.rocket.Rocket
+import com.vlopatka.domain.service.launcher.RocketLauncher
+import com.vlopatka.domain.service.notifier.Notifier
+import com.vlopatka.domain.service.security.SecurityService
 import com.vlopatka.engine.annotation.Injection
-import com.vlopatka.domain.Rocket
-import com.vlopatka.service.launcher.RocketLauncher
-import com.vlopatka.service.notifier.Notifier
-import com.vlopatka.service.security.SecurityService
 
 class NationalSpaceCenter {
 

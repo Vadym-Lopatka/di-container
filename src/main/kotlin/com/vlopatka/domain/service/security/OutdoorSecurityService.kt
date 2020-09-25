@@ -1,7 +1,7 @@
-package com.vlopatka.service.security
+package com.vlopatka.domain.service.security
 
+import com.vlopatka.domain.service.notifier.Notifier
 import com.vlopatka.engine.annotation.Injection
-import com.vlopatka.service.notifier.Notifier
 
 class OutdoorSecurityService : SecurityService {
 

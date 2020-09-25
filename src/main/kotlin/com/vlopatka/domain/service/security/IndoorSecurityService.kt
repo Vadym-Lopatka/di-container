@@ -1,4 +1,4 @@
-package com.vlopatka.service.security
+package com.vlopatka.domain.service.security
 
 class IndoorSecurityService : SecurityService {
     override fun safetyCheck() {

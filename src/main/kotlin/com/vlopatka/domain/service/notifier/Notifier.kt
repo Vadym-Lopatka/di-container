@@ -1,4 +1,4 @@
-package com.vlopatka.service.notifier
+package com.vlopatka.domain.service.notifier
 
 interface Notifier {
     fun notify(msg: String)
