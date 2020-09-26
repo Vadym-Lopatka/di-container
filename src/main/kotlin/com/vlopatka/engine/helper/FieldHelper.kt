@@ -6,7 +6,7 @@ import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
 object FieldHelper {
-    fun setValue(thObject: Any, field: KProperty1<out Any, *>, value: Any?) {
+    fun setValueToObject(thObject: Any, field: KProperty1<out Any, *>, value: Any?) {
         val property = thObject::class.memberProperties.find { it.name == field.name }
 
         if (property is KMutableProperty<*>) {

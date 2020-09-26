@@ -2,7 +2,7 @@ package com.vlopatka.engine.objectConfigurator.impls
 
 import com.vlopatka.engine.annotation.InjectProperty
 import com.vlopatka.engine.context.ApplicationContext
-import com.vlopatka.engine.helper.FieldHelper.setValue
+import com.vlopatka.engine.helper.FieldHelper.setValueToObject
 import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
@@ -17,7 +17,7 @@ class InjectPropertyAnnotationObjectConfigurator : ObjectConfigurator {
                 val theAnnotation = field.annotations.find { it is InjectProperty } as InjectProperty
                 val value = theAnnotation.value.takeIf { it.isNotEmpty() } ?: propertiesMap[field.name]
 
-                setValue(obj, field, value)
+                setValueToObject(obj, field, value)
             }
         }
     }
