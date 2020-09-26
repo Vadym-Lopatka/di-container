@@ -2,7 +2,7 @@ package com.vlopatka
 
 import com.vlopatka.domain.NationalSpaceCenter
 import com.vlopatka.domain.launcher.RocketLauncher
-import com.vlopatka.domain.launcher.TestPlatformRocketLauncher
+import com.vlopatka.domain.launcher.impls.TestPlatformRocketLauncher
 import com.vlopatka.domain.rocket.Rocket
 import com.vlopatka.engine.context.Application
 
