@@ -9,6 +9,6 @@ class OutdoorSecurityService : SecurityService {
     private lateinit var notifier: Notifier
 
     override fun safetyCheck() {
-        println("The area around spaceport is safe")
+        notifier.notify("The area around spaceport is safe")
     }
 }

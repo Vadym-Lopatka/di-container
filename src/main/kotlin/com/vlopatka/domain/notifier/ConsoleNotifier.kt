@@ -15,7 +15,7 @@ class ConsoleNotifier : Notifier {
 
     override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
         for (i in counter downTo 1) {
-            println("$msg $i")
+            notify("$msg $i")
             Thread.sleep(pendingInMs)
         }
     }

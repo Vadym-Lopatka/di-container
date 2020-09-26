@@ -18,13 +18,14 @@ class NationalSpaceCenter {
     private lateinit var launcher: RocketLauncher
 
     fun manageLaunch(rocket: Rocket) {
-        notifier.notify("Attention, we are performing a launch of: $rocket")
+        notifier.notify("$rocket is ready to start")
+
         securityService.safetyCheck()
 
-        notifier.periodicNotifier(msg = "Start in:", pendingInMs = 200)
+        notifier.periodicNotifier(msg = "$rocket Start in:", pendingInMs = 200)
 
         val launchResult = launcher.launch(rocket)
-        notifier.notify("The launch result of $rocket is: $launchResult - ${launchResult.toReadableMessage()}")
+        notifier.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
     }
 }
 
