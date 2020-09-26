@@ -7,6 +7,7 @@ import com.vlopatka.engine.annotation.Singleton
 class ConsoleNotifier : Notifier {
 
     @InjectProperty
+//    @GetFromConfig
     private lateinit var greeting: String
 
     override fun notify(msg: String) {
