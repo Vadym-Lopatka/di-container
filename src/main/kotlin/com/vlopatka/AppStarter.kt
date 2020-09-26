@@ -9,7 +9,7 @@ import com.vlopatka.engine.context.Application
 fun main(args: Array<String>) {
     val context = Application.run(
         packageToScan = "com.vlopatka",
-        interfaceToImplementationMap = defineImplementations()
+        interfaceToImplementationMap = configureInterfaceImplementations()
     )
 
     val spaceCenter = context.getObject(NationalSpaceCenter::class.java)
@@ -24,6 +24,6 @@ fun main(args: Array<String>) {
  * p.s. In prod-like products, it would be more convenient to read this map from an outer source.
  * For example,  a config file.
  */
-private fun defineImplementations(): Map<Class<*>, Class<*>> = mapOf(
+private fun configureInterfaceImplementations(): Map<Class<*>, Class<*>> = mapOf(
     RocketLauncher::class.java to TestPlatformRocketLauncher::class.java
 )
