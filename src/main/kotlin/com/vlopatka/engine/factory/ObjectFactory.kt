@@ -1,4 +1,4 @@
-package com.vlopatka.engine
+package com.vlopatka.engine.factory
 
 import com.vlopatka.engine.context.ApplicationContext
 import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
