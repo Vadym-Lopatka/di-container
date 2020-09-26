@@ -12,7 +12,6 @@ class InjectionAnnotationObjectConfigurator : ObjectConfigurator {
 
     @ExperimentalStdlibApi
     override fun configure(obj: Any, context: ApplicationContext) {
-
         obj::class.memberProperties
             .filter { it.hasAnnotation<Injection>() }
             .forEach { setValueToObject(obj, it, context.getObject(it.returnType.javaType as Class<*>)) }
