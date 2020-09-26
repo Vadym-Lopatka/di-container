@@ -5,7 +5,9 @@ import com.vlopatka.domain.notifier.Notifier
 import com.vlopatka.domain.rocket.Rocket
 import com.vlopatka.domain.security.SecurityService
 import com.vlopatka.engine.annotation.Injection
+import com.vlopatka.engine.annotation.Singleton
 
+@Singleton
 class NationalSpaceCenter {
 
     @Injection
