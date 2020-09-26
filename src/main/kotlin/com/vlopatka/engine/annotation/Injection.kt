@@ -1,4 +1,4 @@
-package com.vlopatka.annotation
+package com.vlopatka.engine.annotation
 
 @Target(
     AnnotationTarget.FIELD,
@@ -7,6 +7,6 @@ package com.vlopatka.annotation
     AnnotationTarget.PROPERTY_GETTER
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class InjectProperty(
+annotation class Injection(
     val value: String = ""
 )

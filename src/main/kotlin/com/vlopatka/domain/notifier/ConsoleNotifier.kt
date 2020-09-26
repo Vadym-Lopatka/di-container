@@ -1,12 +1,12 @@
-package com.vlopatka.service.notifier
+package com.vlopatka.domain.notifier
 
-import com.vlopatka.annotation.Singleton
-import com.vlopatka.annotation.InjectProperty
+import com.vlopatka.engine.annotation.GetFromConfig
+import com.vlopatka.engine.annotation.Singleton
 
 @Singleton
 class ConsoleNotifier : Notifier {
 
-    @InjectProperty
+    @GetFromConfig
     private lateinit var greeting: String
 
     override fun notify(msg: String) {
@@ -15,7 +15,7 @@ class ConsoleNotifier : Notifier {
 
     override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
         for (i in counter downTo 1) {
-            println("$msg $i")
+            notify("$msg $i")
             Thread.sleep(pendingInMs)
         }
     }

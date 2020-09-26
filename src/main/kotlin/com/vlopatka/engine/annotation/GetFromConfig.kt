@@ -1,11 +1,12 @@
-package com.vlopatka.annotation
+package com.vlopatka.engine.annotation
 
 @Target(
     AnnotationTarget.FIELD,
     AnnotationTarget.PROPERTY,
     AnnotationTarget.VALUE_PARAMETER,
-    AnnotationTarget.PROPERTY_GETTER,
-    AnnotationTarget.CLASS
+    AnnotationTarget.PROPERTY_GETTER
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Singleton
+annotation class GetFromConfig(
+    val value: String = ""
+)

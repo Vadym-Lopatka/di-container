@@ -1,4 +1,4 @@
-package com.vlopatka.service.security
+package com.vlopatka.domain.security
 
 interface SecurityService {
     fun safetyCheck()
