@@ -1,4 +1,4 @@
-package com.vlopatka.domain.service.rocket
+package com.vlopatka.domain.rocket
 
 import java.util.*
 

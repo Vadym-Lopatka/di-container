@@ -1,8 +1,9 @@
-package com.vlopatka.engine.objectConfigurator
+package com.vlopatka.engine.objectConfigurator.impls
 
 import com.vlopatka.engine.annotation.Injection
 import com.vlopatka.engine.context.ApplicationContext
 import com.vlopatka.engine.helper.FieldHelper.setValue
+import com.vlopatka.engine.objectConfigurator.ObjectConfigurator
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.javaType

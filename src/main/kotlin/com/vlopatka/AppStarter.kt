@@ -1,11 +1,9 @@
 package com.vlopatka
 
-import com.vlopatka.domain.service.center.NationalSpaceCenter
-import com.vlopatka.domain.service.launcher.RocketLauncher
-import com.vlopatka.domain.service.launcher.TestPlatformRocketLauncher
-import com.vlopatka.domain.service.rocket.Rocket
-import com.vlopatka.domain.service.security.OutdoorSecurityService
-import com.vlopatka.domain.service.security.SecurityService
+import com.vlopatka.domain.NationalSpaceCenter
+import com.vlopatka.domain.launcher.RocketLauncher
+import com.vlopatka.domain.launcher.TestPlatformRocketLauncher
+import com.vlopatka.domain.rocket.Rocket
 import com.vlopatka.engine.context.Application
 
 fun main(args: Array<String>) {

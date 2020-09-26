@@ -1,4 +1,4 @@
-package com.vlopatka.domain.service.notifier
+package com.vlopatka.domain.notifier
 
 import com.vlopatka.engine.annotation.InjectProperty
 import com.vlopatka.engine.annotation.Singleton
