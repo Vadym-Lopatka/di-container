@@ -24,7 +24,7 @@ class NationalSpaceCenter {
 
         securityService.safetyCheck()
 
-        notifier.periodicNotifier(msg = "$rocket Start in:", pendingInMs = 200)
+        notifier.periodicNotifier(msg = "$rocket Start in:")
 
         val launchResult = launcher.launch(rocket)
         notifier.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
