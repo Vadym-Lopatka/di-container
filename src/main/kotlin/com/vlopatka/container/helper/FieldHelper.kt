@@ -1,4 +1,4 @@
-package com.vlopatka.dicontainer.helper
+package com.vlopatka.container.helper
 
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty1

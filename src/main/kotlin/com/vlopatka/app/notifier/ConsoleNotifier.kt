@@ -1,7 +1,7 @@
 package com.vlopatka.app.notifier
 
-import com.vlopatka.dicontainer.annotation.GetFromConfig
-import com.vlopatka.dicontainer.annotation.Singleton
+import com.vlopatka.container.annotation.GetFromConfig
+import com.vlopatka.container.annotation.Singleton
 
 @Singleton
 class ConsoleNotifier : Notifier {

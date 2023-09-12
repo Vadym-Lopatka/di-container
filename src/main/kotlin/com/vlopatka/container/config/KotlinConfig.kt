@@ -1,4 +1,4 @@
-package com.vlopatka.dicontainer.config
+package com.vlopatka.container.config
 
 import org.reflections.Reflections
 

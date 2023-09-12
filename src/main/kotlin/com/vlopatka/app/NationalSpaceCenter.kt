@@ -4,8 +4,8 @@ import com.vlopatka.app.launcher.RocketLauncher
 import com.vlopatka.app.notifier.Notifier
 import com.vlopatka.app.rocket.Rocket
 import com.vlopatka.app.security.SecurityService
-import com.vlopatka.dicontainer.annotation.Injection
-import com.vlopatka.dicontainer.annotation.Singleton
+import com.vlopatka.container.annotation.Injection
+import com.vlopatka.container.annotation.Singleton
 
 @Singleton
 class NationalSpaceCenter {

@@ -4,7 +4,7 @@ import com.vlopatka.app.NationalSpaceCenter
 import com.vlopatka.app.launcher.RocketLauncher
 import com.vlopatka.app.launcher.impls.TestPlatformRocketLauncher
 import com.vlopatka.app.rocket.Rocket
-import com.vlopatka.dicontainer.context.Application
+import com.vlopatka.container.context.Application
 
 fun main(args: Array<String>) {
     val context = Application.run(

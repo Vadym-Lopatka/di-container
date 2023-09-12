@@ -1,9 +1,9 @@
-package com.vlopatka.dicontainer.objectConfigurator.impls
+package com.vlopatka.container.objectConfigurator.impls
 
-import com.vlopatka.dicontainer.annotation.GetFromConfig
-import com.vlopatka.dicontainer.context.ApplicationContext
-import com.vlopatka.dicontainer.helper.FieldHelper.setValueToObject
-import com.vlopatka.dicontainer.objectConfigurator.ObjectConfigurator
+import com.vlopatka.container.annotation.GetFromConfig
+import com.vlopatka.container.context.ApplicationContext
+import com.vlopatka.container.helper.FieldHelper.setValueToObject
+import com.vlopatka.container.objectConfigurator.ObjectConfigurator
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties

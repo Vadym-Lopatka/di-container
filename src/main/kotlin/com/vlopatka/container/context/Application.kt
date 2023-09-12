@@ -1,7 +1,7 @@
-package com.vlopatka.dicontainer.context
+package com.vlopatka.container.context
 
-import com.vlopatka.dicontainer.config.KotlinConfig
-import com.vlopatka.dicontainer.factory.ObjectFactory
+import com.vlopatka.container.config.KotlinConfig
+import com.vlopatka.container.factory.ObjectFactory
 
 object Application {
 

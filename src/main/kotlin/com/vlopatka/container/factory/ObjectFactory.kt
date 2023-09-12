@@ -1,7 +1,7 @@
-package com.vlopatka.dicontainer.factory
+package com.vlopatka.container.factory
 
-import com.vlopatka.dicontainer.context.ApplicationContext
-import com.vlopatka.dicontainer.objectConfigurator.ObjectConfigurator
+import com.vlopatka.container.context.ApplicationContext
+import com.vlopatka.container.objectConfigurator.ObjectConfigurator
 
 class ObjectFactory(
     private val context: ApplicationContext
@@ -18,7 +18,7 @@ class ObjectFactory(
          * will be processed once(on startup) by each implementation of the ObjectConfigurator.
          *
          * @see com.vlopatka.annotation.Injection
-         * @see com.vlopatka.dicontainer.objectConfigurator.ObjectConfigurator
+         * @see com.vlopatka.container.objectConfigurator.ObjectConfigurator
          */
         configurators.forEach { it.configure(obj, context) }
 

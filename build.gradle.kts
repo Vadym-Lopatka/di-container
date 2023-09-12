@@ -25,10 +25,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-application {
-//    mainClassName = "com.vlopatka.AppStarterKt"
-}
-
 tasks.withType<Test> {
     useJUnitPlatform()
 }

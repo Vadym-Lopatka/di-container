@@ -1,8 +1,8 @@
-package com.vlopatka.dicontainer.context
+package com.vlopatka.container.context
 
-import com.vlopatka.dicontainer.annotation.Singleton
-import com.vlopatka.dicontainer.config.KotlinConfig
-import com.vlopatka.dicontainer.factory.ObjectFactory
+import com.vlopatka.container.annotation.Singleton
+import com.vlopatka.container.config.KotlinConfig
+import com.vlopatka.container.factory.ObjectFactory
 import java.util.concurrent.ConcurrentHashMap
 
 class ApplicationContext(val config: KotlinConfig) {
