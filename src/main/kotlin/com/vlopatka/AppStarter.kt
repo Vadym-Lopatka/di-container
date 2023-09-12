@@ -7,6 +7,7 @@ import com.vlopatka.app.rocket.Rocket
 import com.vlopatka.container.context.Application
 
 fun main(args: Array<String>) {
+    println("App has started with params: $args")
     val context = Application.run(
         packageToScan = "com.vlopatka",
         interfaceToImplementationMap = configureInterfaceImplementations()
@@ -19,7 +20,7 @@ fun main(args: Array<String>) {
 
 /**
  * Define here which particular implementation to use when your interface has multiple implementations
- * @see com.vlopatka.app.service.launcher.RocketLauncher
+ * @see com.vlopatka.app.launcher.RocketLauncher
  *
  * p.s. In prod-like products, it would be more convenient to read this map from an outer source.
  * For example,  a config file.

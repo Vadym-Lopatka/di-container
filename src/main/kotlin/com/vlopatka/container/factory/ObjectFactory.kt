@@ -3,6 +3,7 @@ package com.vlopatka.container.factory
 import com.vlopatka.container.context.ApplicationContext
 import com.vlopatka.container.objectConfigurator.ObjectConfigurator
 
+@Suppress("UNCHECKED_CAST")
 class ObjectFactory(
     private val context: ApplicationContext
 ) {
@@ -17,7 +18,7 @@ class ObjectFactory(
          * Every DI component that would be created through @Injection
          * will be processed once(on startup) by each implementation of the ObjectConfigurator.
          *
-         * @see com.vlopatka.annotation.Injection
+         * @see com.vlopatka.container.annotation.Injection
          * @see com.vlopatka.container.objectConfigurator.ObjectConfigurator
          */
         configurators.forEach { it.configure(obj, context) }

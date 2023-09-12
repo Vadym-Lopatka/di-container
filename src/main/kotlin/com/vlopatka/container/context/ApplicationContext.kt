@@ -5,6 +5,7 @@ import com.vlopatka.container.config.KotlinConfig
 import com.vlopatka.container.factory.ObjectFactory
 import java.util.concurrent.ConcurrentHashMap
 
+@Suppress("UNCHECKED_CAST")
 class ApplicationContext(val config: KotlinConfig) {
     private val cache: ConcurrentHashMap<Class<*>, Any> = ConcurrentHashMap()
     var factory: ObjectFactory? = null

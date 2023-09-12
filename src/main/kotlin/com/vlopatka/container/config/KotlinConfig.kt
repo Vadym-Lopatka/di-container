@@ -2,9 +2,14 @@ package com.vlopatka.container.config
 
 import org.reflections.Reflections
 
-class KotlinConfig(packageToScan: String, interfaceToImplementationMap: Map<Class<*>, Class<*>>) : Config {
+@Suppress("UNCHECKED_CAST")
+class KotlinConfig(
+    packageToScan: String,
+    private val interfaceToImplementationMap: Map<Class<*>, Class<*>>
+
+) : Config {
+
     private val scanner: Reflections = Reflections(packageToScan)
-    private val interfaceToImplementationMap = interfaceToImplementationMap
 
     override fun <T> getImplClass(ifc: Class<T>): Class<T> {
         return interfaceToImplementationMap.getOrElse(ifc, defaultValue = {
