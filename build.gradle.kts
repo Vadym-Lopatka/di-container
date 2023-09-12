@@ -1,22 +1,34 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.9.10"
     application
 }
-group = "me.shade"
-version = "1.0-SNAPSHOT"
+group = "com.example"
+version = "0.0.1-SNAPSHOT"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
 repositories {
     mavenCentral()
 }
 dependencies {
-    implementation ("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
-    implementation("org.reflections:reflections:0.9.12")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
+    implementation("org.reflections:reflections:0.10.2")
+
 }
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "17"
+    }
 }
+
 application {
-    mainClassName = "com.vlopatka.AppStarterKt"
+//    mainClassName = "com.vlopatka.AppStarterKt"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
