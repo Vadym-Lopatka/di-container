@@ -12,6 +12,7 @@ _(yes, like that one we are used to using in Spring Framework)_
 2. cd to **../di-container**
 2. Execute **./gradlew run**
 
+**Example usage**
 _To demonstrate the container's work I chose a starship area domain.\
 I want to simulate the working process of a cosmodrome that manages the launches of space rockets._
 
