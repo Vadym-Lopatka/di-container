@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     println("App has started with params: $args")
     val context = Application.run(
         packageToScan = "com.vlopatka",
-        interfaceToImplementationMap = configureInterfaceImplementations()
+        ifcToImpl = configureInterfaceImplementations()
     )
 
     val spaceCenter = context.getObject(NationalSpaceCenter::class.java)

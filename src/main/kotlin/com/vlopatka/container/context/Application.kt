@@ -5,8 +5,8 @@ import com.vlopatka.container.factory.ObjectFactory
 
 object Application {
 
-    fun run(packageToScan: String, interfaceToImplementationMap: Map<Class<*>, Class<*>>): ApplicationContext {
-        val config = KotlinConfig(packageToScan, interfaceToImplementationMap)
+    fun run(packageToScan: String, ifcToImpl: Map<Class<*>, Class<*>>): ApplicationContext {
+        val config = KotlinConfig(packageToScan, ifcToImpl)
         val context = ApplicationContext(config)
 
         val factory = ObjectFactory(context)
