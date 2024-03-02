@@ -1,6 +1,6 @@
 package com.vlopatka.app.security
 
-import com.vlopatka.app.notifier.Notifier
+import com.vlopatka.app.speaker.Loudspeaker
 import com.vlopatka.container.annotation.AutoInject
 import com.vlopatka.container.annotation.Singleton
 
@@ -8,9 +8,9 @@ import com.vlopatka.container.annotation.Singleton
 class OutdoorSecurityService : SecurityService {
 
     @AutoInject
-    private lateinit var notifier: Notifier
+    private lateinit var loudspeaker: Loudspeaker
 
     override fun safetyCheck() {
-        notifier.notify("The area around spaceport is safe")
+        loudspeaker.notify("The area around spaceport is safe")
     }
 }

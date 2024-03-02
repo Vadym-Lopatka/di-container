@@ -1,10 +1,10 @@
-package com.vlopatka.app.notifier
+package com.vlopatka.app.speaker
 
 import com.vlopatka.container.annotation.ConfigValue
 import com.vlopatka.container.annotation.Singleton
 
 @Singleton
-class ConsoleNotifier : Notifier {
+class Megaphone : Loudspeaker {
 
     @ConfigValue
     private lateinit var greeting: String
