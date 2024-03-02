@@ -9,9 +9,8 @@ class Megaphone : CommunicationSystem {
     @ConfigBased
     private lateinit var greeting: String
 
-    override fun notify(msg: String) {
-        println("$greeting $msg")
-    }
+    override fun notify(msg: String) = println("$greeting $msg")
+
 
     override fun notifyPeriodically(msg: String, times: Int, pendingMs: Long) {
         for (i in times downTo 1) {
