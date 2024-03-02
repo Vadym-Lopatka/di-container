@@ -1,9 +1,9 @@
 package com.vlopatka.app
 
+import com.vlopatka.app.communication.CommunicationSystem
 import com.vlopatka.app.launcher.RocketLauncher
-import com.vlopatka.app.notifier.Notifier
 import com.vlopatka.app.rocket.Rocket
-import com.vlopatka.app.security.SecurityService
+import com.vlopatka.app.security.SecurityPerson
 import com.vlopatka.container.annotation.Injection
 import com.vlopatka.container.annotation.Singleton
 
@@ -11,23 +11,23 @@ import com.vlopatka.container.annotation.Singleton
 class NationalSpaceCenter {
 
     @Injection
-    private lateinit var notifier: Notifier
+    private lateinit var communicationSystem: CommunicationSystem
 
     @Injection
-    private lateinit var securityService: SecurityService
+    private lateinit var securityPerson: SecurityPerson
 
     @Injection
     private lateinit var launcher: RocketLauncher
 
     fun manageLaunch(rocket: Rocket) {
-        notifier.notify("$rocket is ready to start")
+        communicationSystem.notify("$rocket is ready to start")
 
-        securityService.safetyCheck()
+        securityPerson.safetyCheck()
 
-        notifier.periodicNotifier(msg = "$rocket Start in:")
+        communicationSystem.notifyPeriodically(msg = "$rocket Start in:")
 
         val launchResult = launcher.launch(rocket)
-        notifier.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
+        communicationSystem.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
     }
 }
 

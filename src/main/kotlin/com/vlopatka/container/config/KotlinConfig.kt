@@ -5,14 +5,14 @@ import org.reflections.Reflections
 @Suppress("UNCHECKED_CAST")
 class KotlinConfig(
     packageToScan: String,
-    private val interfaceToImplementationMap: Map<Class<*>, Class<*>>
+    private val ifcToImpl: Map<Class<*>, Class<*>>
 
 ) : Config {
 
     private val scanner: Reflections = Reflections(packageToScan)
 
     override fun <T> getImplClass(ifc: Class<T>): Class<T> {
-        return interfaceToImplementationMap.getOrElse(ifc, defaultValue = {
+        return ifcToImpl.getOrElse(ifc, defaultValue = {
 
             return scanner.getSubTypesOf(ifc).takeIf { it.size == 1 }
                 ?.let { it.first() as Class<T> }
