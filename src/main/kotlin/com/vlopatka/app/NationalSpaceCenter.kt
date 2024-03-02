@@ -4,19 +4,19 @@ import com.vlopatka.app.communication.CommunicationSystem
 import com.vlopatka.app.launcher.RocketLauncher
 import com.vlopatka.app.rocket.Rocket
 import com.vlopatka.app.security.SecurityPerson
-import com.vlopatka.container.annotation.AutoInject
+import com.vlopatka.container.annotation.Injection
 import com.vlopatka.container.annotation.Singleton
 
 @Singleton
 class NationalSpaceCenter {
 
-    @AutoInject
+    @Injection
     private lateinit var communicationSystem: CommunicationSystem
 
-    @AutoInject
+    @Injection
     private lateinit var securityPerson: SecurityPerson
 
-    @AutoInject
+    @Injection
     private lateinit var launcher: RocketLauncher
 
     fun manageLaunch(rocket: Rocket) {

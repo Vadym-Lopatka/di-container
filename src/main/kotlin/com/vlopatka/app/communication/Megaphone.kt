@@ -1,12 +1,12 @@
 package com.vlopatka.app.communication
 
-import com.vlopatka.container.annotation.ConfigValue
+import com.vlopatka.container.annotation.ConfigBased
 import com.vlopatka.container.annotation.Singleton
 
 @Singleton
 class Megaphone : CommunicationSystem {
 
-    @ConfigValue
+    @ConfigBased
     private lateinit var greeting: String
 
     override fun notify(msg: String) {

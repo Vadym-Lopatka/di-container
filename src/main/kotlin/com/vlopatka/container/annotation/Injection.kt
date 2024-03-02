@@ -7,6 +7,6 @@ package com.vlopatka.container.annotation
     AnnotationTarget.PROPERTY_GETTER
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ConfigValue(
+annotation class Injection(
     val value: String = ""
 )
