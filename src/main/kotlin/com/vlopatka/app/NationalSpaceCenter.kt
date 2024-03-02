@@ -1,9 +1,9 @@
 package com.vlopatka.app
 
+import com.vlopatka.app.communication.CommunicationSystem
 import com.vlopatka.app.launcher.RocketLauncher
-import com.vlopatka.app.speaker.Loudspeaker
 import com.vlopatka.app.rocket.Rocket
-import com.vlopatka.app.security.SecurityService
+import com.vlopatka.app.security.SecurityPerson
 import com.vlopatka.container.annotation.AutoInject
 import com.vlopatka.container.annotation.Singleton
 
@@ -11,23 +11,23 @@ import com.vlopatka.container.annotation.Singleton
 class NationalSpaceCenter {
 
     @AutoInject
-    private lateinit var loudspeaker: Loudspeaker
+    private lateinit var communicationSystem: CommunicationSystem
 
     @AutoInject
-    private lateinit var securityService: SecurityService
+    private lateinit var securityPerson: SecurityPerson
 
     @AutoInject
     private lateinit var launcher: RocketLauncher
 
     fun manageLaunch(rocket: Rocket) {
-        loudspeaker.notify("$rocket is ready to start")
+        communicationSystem.notify("$rocket is ready to start")
 
-        securityService.safetyCheck()
+        securityPerson.safetyCheck()
 
-        loudspeaker.periodicNotifier(msg = "$rocket Start in:")
+        communicationSystem.notifyPeriodically(msg = "$rocket Start in:")
 
         val launchResult = launcher.launch(rocket)
-        loudspeaker.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
+        communicationSystem.notify("$rocket launch result is: $launchResult - ${launchResult.toReadableMessage()}")
     }
 }
 

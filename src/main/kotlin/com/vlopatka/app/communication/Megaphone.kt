@@ -1,10 +1,10 @@
-package com.vlopatka.app.speaker
+package com.vlopatka.app.communication
 
 import com.vlopatka.container.annotation.ConfigValue
 import com.vlopatka.container.annotation.Singleton
 
 @Singleton
-class Megaphone : Loudspeaker {
+class Megaphone : CommunicationSystem {
 
     @ConfigValue
     private lateinit var greeting: String
@@ -13,10 +13,10 @@ class Megaphone : Loudspeaker {
         println("$greeting $msg")
     }
 
-    override fun periodicNotifier(msg: String, counter: Int, pendingInMs: Long) {
-        for (i in counter downTo 1) {
+    override fun notifyPeriodically(msg: String, times: Int, pendingMs: Long) {
+        for (i in times downTo 1) {
             notify("$msg $i")
-            Thread.sleep(pendingInMs)
+            Thread.sleep(pendingMs)
         }
     }
 }

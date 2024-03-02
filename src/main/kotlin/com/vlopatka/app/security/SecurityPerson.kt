@@ -1,5 +1,5 @@
 package com.vlopatka.app.security
 
-interface SecurityService {
+interface SecurityPerson {
     fun safetyCheck()
 }
